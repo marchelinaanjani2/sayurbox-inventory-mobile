@@ -15,7 +15,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'PBP A',
+          'PBP B',
         ),
       ),
       body: SingleChildScrollView(
