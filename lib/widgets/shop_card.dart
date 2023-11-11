@@ -1,0 +1,10 @@
+import 'package:sayurbox_inventory/screens/shoplist_form.dart'; // Import ShopFormPage
+import 'package:flutter/material.dart';
+
+class ShopItem {
+  final String name;
+  final IconData icon;
+  final Color color;
+
+  ShopItem(this.name, this.icon, this.color);
+}

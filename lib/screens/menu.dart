@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:sayurbox_inventory/widgets/left_drawer.dart';
+import 'package:sayurbox_inventory/widgets/shop_card.dart';
+import 'package:sayurbox_inventory/screens/shoplist_form.dart'; // Import ShopFormPage
+import 'package:sayurbox_inventory/widgets/product_model.dart';
+import 'package:sayurbox_inventory/screens/product_list_page.dart';
 
 class MyHomePage extends StatelessWidget {
-  MyHomePage({Key? key}) : super(key: key);
+  final List<Product> products;
+
+  MyHomePage({Key? key, required this.products}) : super(key: key);
 
   final List<ShopItem> items = [
     ShopItem("Lihat Item", Icons.checklist, Color.fromARGB(255, 69, 129, 86)),
     ShopItem("Tambah Item", Icons.add_shopping_cart,
         Color.fromARGB(255, 28, 75, 29)),
-    ShopItem("Logout", Icons.logout, Color.fromARGB(255, 69, 208, 201)),
+    ShopItem("Logout", Icons.logout, Color.fromARGB(255, 19, 57, 56)),
   ];
 
   @override
@@ -17,19 +24,21 @@ class MyHomePage extends StatelessWidget {
         title: const Text(
           'PBP B',
         ),
+        backgroundColor: Colors.teal[300],
+        foregroundColor: Colors.white,
+      ),
+      drawer: LeftDrawer(
+        products: products,
       ),
       body: SingleChildScrollView(
-        // Widget wrapper yang dapat discroll
         child: Padding(
-          padding: const EdgeInsets.all(10.0), // Set padding dari halaman
+          padding: const EdgeInsets.all(10.0),
           child: Column(
-            // Widget untuk menampilkan children secara vertikal
             children: <Widget>[
               const Padding(
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                // Widget Text untuk menampilkan tulisan dengan alignment center dan style yang sesuai
                 child: Text(
-                  'SayurBox Inventory', // Text yang menandakan toko
+                  'SayurBox Inventory',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
@@ -37,9 +46,7 @@ class MyHomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              // Grid layout
               GridView.count(
-                // Container pada card kita.
                 primary: true,
                 padding: const EdgeInsets.all(20),
                 crossAxisSpacing: 10,
@@ -47,8 +54,7 @@ class MyHomePage extends StatelessWidget {
                 crossAxisCount: 3,
                 shrinkWrap: true,
                 children: items.map((ShopItem item) {
-                  // Iterasi untuk setiap item
-                  return ShopCard(item);
+                  return ShopCard(item, products: products);
                 }).toList(),
               ),
             ],
@@ -59,23 +65,16 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-class ShopItem {
-  final String name;
-  final IconData icon;
-  final Color color; // Menambah properti warna
-
-  ShopItem(this.name, this.icon, this.color);
-}
-
 class ShopCard extends StatelessWidget {
   final ShopItem item;
+  final List<Product> products;
 
-  const ShopCard(this.item, {Key? key}) : super(key: key);
+  ShopCard(this.item, {Key? key, required this.products}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: item.color, // Menggunakan warna dari objek ShopItem
+      color: item.color,
       child: InkWell(
         onTap: () {
           ScaffoldMessenger.of(context)
@@ -83,6 +82,23 @@ class ShopCard extends StatelessWidget {
             ..showSnackBar(SnackBar(
               content: Text("Kamu telah menekan tombol ${item.name}!"),
             ));
+
+          if (item.name == "Tambah Item") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ShopFormPage(products: products)),
+            );
+          }
+
+          if (item.name == "Lihat Item") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProductListPage(products: products),
+              ),
+            );
+          }
         },
         child: Container(
           padding: const EdgeInsets.all(8),

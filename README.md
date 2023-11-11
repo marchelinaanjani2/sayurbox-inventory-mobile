@@ -1,4 +1,92 @@
-TUGAS 7
+*TUGAS 8*
+
+1. Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement(), disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!
+Jawab:
+- Navigator.push() digunakan untuk menavigasi ke halaman baru tanpa menghapus halaman sebelumnya dari tumpukan navigasi. Hal ini berguna jika kita ingin kembali ke halaman sebelumnya dengan menekan tombol kembali atau memanggil Navigator.pop(). Contoh penggunaan Navigator.push() adalah ketika kita ingin menampilkan detail produk dari daftar produk. Contohnya:
+```dart
+Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => ProductDetailPage(product)),
+);
+```
+- Navigator.pushReplacement() digunakan untuk menavigasi ke halaman baru dengan menghapus halaman sebelumnya dari tumpukan navigasi. Hal ini berguna jika kita tidak ingin kembali ke halaman sebelumnya karena sudah tidak relevan atau sudah selesai. Contoh penggunaan Navigator.pushReplacement() adalah ketika kita ingin menampilkan halaman login setelah logout atau menampilkan halaman utama setelah login. Kita bisa menggunakan kode seperti ini:
+
+```dart
+Navigator.pushReplacement(
+  context,
+  MaterialPageRoute(builder: (context) => LoginPage()),
+);
+```
+Sumber :https://medium.com/@sparkleotech/flutter-navigation-and-routing-a-complete-guide-698f1d4ccec5.
+
+2. Jelaskan masing-masing layout widget pada Flutter dan konteks penggunaannya masing-masing!
+Jawab: 
+Berikut adalah penjelasan tentang beberapa layout widget pada Flutter dan konteks penggunaannya masing-masing:
+
+- **Center**: Widget yang menempatkan child-nya di tengah-tengah dirinya sendiri, baik secara horizontal maupun vertikal. Widget ini berguna jika kita ingin menampilkan satu widget di tengah layar atau di tengah parent-nya. Contoh penggunaannya adalah ketika kita ingin menampilkan teks "Hello World" di tengah layar.
+- **Row**: Widget yang menata sejumlah child-nya secara horizontal, satu di samping yang lain. Widget ini berguna jika kita ingin menampilkan beberapa widget yang berhubungan secara linear, seperti ikon, tombol, atau teks. Contoh penggunaannya adalah ketika kita ingin menampilkan tiga ikon dengan label di bawahnya.
+- **Column**: Widget yang menata sejumlah child-nya secara vertikal, satu di bawah yang lain. Widget ini berguna jika kita ingin menampilkan beberapa widget yang berhubungan secara linear, seperti judul, deskripsi, atau gambar. Contoh penggunaannya adalah ketika kita ingin menampilkan detail produk dengan gambar di atas dan teks di bawahnya¹.
+- **Stack**: Widget yang menumpuk sejumlah child-nya di atas satu sama lain, dengan child pertama di bawah dan child terakhir di atas. Widget ini berguna jika kita ingin menampilkan beberapa widget yang berhubungan secara spasial, seperti gambar dengan teks di atasnya, atau latar belakang dengan konten di atasnya. Contoh penggunaannya adalah ketika kita ingin menampilkan gambar profil dengan ikon edit di sudutnya.
+- **GridView**: Widget yang menata sejumlah child-nya dalam bentuk grid, dengan jumlah kolom yang tetap dan jumlah baris yang fleksibel. Widget ini berguna jika kita ingin menampilkan beberapa widget yang berhubungan secara kategorikal, seperti daftar produk, foto, atau menu. Contoh penggunaannya adalah ketika kita ingin menampilkan galeri foto dengan ukuran yang seragam.
+- **ListView**: Widget yang menata sejumlah child-nya dalam bentuk daftar, dengan arah scroll yang bisa horizontal atau vertikal. Widget ini berguna jika kita ingin menampilkan beberapa widget yang berhubungan secara sekuensial, seperti daftar berita, pesan, atau komentar. Contoh penggunaannya adalah ketika kita ingin menampilkan daftar berita dengan judul dan gambar.
+- **LayoutBuilder**: Widget yang membangun child-nya berdasarkan batasan ukuran yang diberikan oleh parent-nya. Widget ini berguna jika kita ingin membuat child-nya menyesuaikan diri dengan ukuran layar yang berbeda-beda, seperti smartphone, tablet, atau desktop. Contoh penggunaannya adalah ketika kita ingin menampilkan widget yang berbeda tergantung pada orientasi layar.
+
+Sumber: https://docs.flutter.dev/ui/widgets/layout
+
+3. Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!
+Jawab: 
+
+
+
+4.Bagaimana penerapan clean architecture pada aplikasi Flutter?
+Jawab:
+Penerapan clean architecture pada aplikasi Flutter adalah salah satu cara untuk membuat kode yang modular, bersih, dan mudah diuji. Clean architecture membagi aplikasi menjadi beberapa lapisan, yaitu:
+
+- **Domain**: Lapisan ini berisi model data dan logika bisnis aplikasi. Lapisan ini tidak bergantung pada framework atau detail implementasi lainnya. Lapisan ini juga berisi abstraksi dari kasus penggunaan (use case) dan sumber data (repository) yang akan diimplementasikan di lapisan lain.
+- **Data**: Lapisan ini berisi implementasi dari repository yang mengatur interaksi dengan sumber data eksternal, seperti database, API, atau cache. Lapisan ini juga berisi model data yang sesuai dengan format sumber data.
+- **Presentation**: Lapisan ini berisi kode yang menampilkan antarmuka pengguna (UI) dan mengatur interaksi dengan pengguna. Lapisan ini menggunakan berbagai pola manajemen state, seperti BLoC, Provider, atau Redux. Lapisan ini juga berisi model data yang sesuai dengan format UI.
+
+Untuk menghubungkan lapisan-lapisan tersebut, kita bisa menggunakan dependency injection, yaitu teknik yang menyediakan ketergantungan kelas dari luar kelas itu sendiri. Dengan dependency injection, kita bisa mengurangi ketergantungan antar kelas dan memudahkan pengujian.
+
+Berikut adalah contoh struktur folder dari aplikasi Flutter yang menerapkan clean architecture:
+
+```
+lib
+├── core
+│   ├── constants
+│   ├── errors
+│   ├── network
+│   └── utils
+├── data
+│   ├── datasources
+│   ├── models
+│   └── repositories
+├── domain
+│   ├── entities
+│   ├── repositories
+│   └── usecases
+└── presentation
+    ├── blocs
+    ├── pages
+    └── widgets
+```
+
+Sumber:  https://medium.com/ruangguru/an-introduction-to-flutter-clean-architecture-ae00154001b0.
+
+5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial)
+Jawab: 
+
+
+
+Source: Conversation with Bing, 11/11/2023
+(1) Layout widgets | Flutter. https://docs.flutter.dev/ui/widgets/layout.
+(2) Layouts in Flutter | Flutter. https://docs.flutter.dev/ui/layout.
+(3) Layout widgets | Flutter. https://docs.flutter.dev/ui/widgets/layout.
+(4) Flutter - LayoutBuilder Widget - GeeksforGeeks. https://www.geeksforgeeks.org/flutter-layoutbuilder-widget/.
+(5) Flutter Layouts - Javatpoint. https://www.javatpoint.com/flutter-layouts.
+(6) LayoutBuilder class - widgets library - Dart API - Flutter. https://api.flutter.dev/flutter/widgets/LayoutBuilder-class.html.
+------------------------------------------------------------------
+*TUGAS 7*
 
 1. Apa perbedaan utama antara stateless dan stateful widget dalam konteks pengembangan aplikasi Flutter?
 Jawab: 
