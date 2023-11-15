@@ -87,9 +87,17 @@ Sumber:  https://medium.com/ruangguru/an-introduction-to-flutter-clean-architect
 
 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial)
 Jawab: 
-1. **Membuat Halaman formulir**
-
-
+1. Menyusun organisasi file tugas sebelumnya dengan memindahkan ShopItem ke dalam file baru shop_card.dart yang dimasukkan pada folder widgets. Serta memindahkan menu.dart dalam folder screens.
+2. Membuat left_drawer.dart pada direktori  widgets
+3. Memuat shoplist_form.dart pada direktori screens
+4. Membuat productlist_page.dart pada direktori screens
+5. membuat kode pada left_drawer sesuai tutorial dan import dari shoplist_form dan product_list_page dan tambahkan routing.
+6. Import left_drawer ke menu.dart
+7. membuat code pada file shoplist_form.dart sesuai tutorial namun menambahkan variable input mengikuti Proyek Django sebelumnya.
+8. Menambahkan validator sesuai ketentuan.
+9. membuat fungsi showDialog jika pengguna berhasil mengisi data sesuai semua validator
+10. Menambahkan navigasi pada menu.dart dari button yang sudah ada.
+Git add, commit, push.
 
 
 ------------------------------------------------------------------
