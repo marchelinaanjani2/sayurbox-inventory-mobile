@@ -35,7 +35,19 @@ Sumber: https://docs.flutter.dev/ui/widgets/layout
 
 3. Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!
 Jawab: 
+Pada tugas ini, elemen input pada form yang digunakan adalah TextFormField. TexFormField digunakan untuk Nama produk, category, price, amount, dan deskripsi. 
 
+- TextFormField digunakan untuk mengambil input.
+- decoration memberikan hint dan label untuk input.
+- onChanged digunakan untuk meng-update nilai variabel ketika nilai input berubah.
+- validator digunakan untuk menentukan validitas input, yaitu apakah field input tidak boleh kosong.
+
+**ElevatedButton untuk Menyimpan:**
+- ElevatedButton digunakan sebagai tombol untuk menyimpan data produk.
+- onPressed: menentukan aksi yang dilakukan ketika tombol ditekan. Pada kasus ini, mengecek validitas form dan menampilkan dialog jika valid.
+- Dalam dialog, menampilkan informasi produk yang telah disimpan.
+
+Penggunaan TextFormField memudahkan pengguna untuk memasukkan data dengan menyediakan antarmuka yang dapat diisi dan validasi yang dapat dikonfigurasi. Tombol ElevatedButton digunakan untuk memicu aksi pengiriman data setelah pengguna mengisi formulir.
 
 
 4.Bagaimana penerapan clean architecture pada aplikasi Flutter?
@@ -75,16 +87,11 @@ Sumber:  https://medium.com/ruangguru/an-introduction-to-flutter-clean-architect
 
 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial)
 Jawab: 
+1. **Membuat Halaman formulir**
 
 
 
-Source: Conversation with Bing, 11/11/2023
-(1) Layout widgets | Flutter. https://docs.flutter.dev/ui/widgets/layout.
-(2) Layouts in Flutter | Flutter. https://docs.flutter.dev/ui/layout.
-(3) Layout widgets | Flutter. https://docs.flutter.dev/ui/widgets/layout.
-(4) Flutter - LayoutBuilder Widget - GeeksforGeeks. https://www.geeksforgeeks.org/flutter-layoutbuilder-widget/.
-(5) Flutter Layouts - Javatpoint. https://www.javatpoint.com/flutter-layouts.
-(6) LayoutBuilder class - widgets library - Dart API - Flutter. https://api.flutter.dev/flutter/widgets/LayoutBuilder-class.html.
+
 ------------------------------------------------------------------
 *TUGAS 7*
 
