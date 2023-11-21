@@ -1,23 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart'; // Import provider
 import 'package:sayurbox_inventory/screens/menu.dart';
-import 'package:sayurbox_inventory/widgets/product_model.dart';
+import 'package:sayurbox_inventory/screens/login.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        colorScheme:
-            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 63, 181, 169)),
-        useMaterial3: true,
-      ),
-      home: MyHomePage(products: []),
+    return Provider(
+      // Gunakan Provider untuk menyediakan instance CookieRequest
+      create: (_) {
+        CookieRequest request = CookieRequest();
+        return request;
+      },
+      child: MaterialApp(
+          title: 'Flutter App',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
+            useMaterial3: true,
+          ),
+          home: LoginPage()),
     );
   }
 }

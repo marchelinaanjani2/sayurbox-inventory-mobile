@@ -1,3 +1,165 @@
+*TUGAS 9*
+
+1. Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu? Jika iya, apakah hal tersebut lebih baik daripada membuat model sebelum melakukan pengambilan data JSON?
+Jawab: 
+Ya, kita bisa melakukan pengambilan data JSON tanpa membuat model terlebih dahulu. Dalam Flutter, ada beberapa cara untuk mengambil dan mengelola data JSON, dan kita dapat memilih pendekatan yang paling sesuai dengan kebutuhan proyek Anda.
+
+Berikut adalah dua pendekatan umum:
+
+1. **Pengambilan Data Tanpa Model:**
+   Jika struktur JSON sederhana dan kita hanya perlu mengambil beberapa nilai dari respons API, kita dapat menggunakan `http` atau paket Flutter lainnya untuk melakukan pemanggilan API dan mengambil data JSON sebagai `Map<String, dynamic>`. kita kemudian dapat mengakses nilai-nilai ini langsung menggunakan kunci.
+
+   Contoh pengambilan data tanpa model menggunakan paket `http`:
+
+   ```dart
+   import 'dart:convert';
+   import 'package:http/http.dart' as http;
+
+   void fetchData() async {
+     final response = await http.get('https://example.com/api/data');
+     if (response.statusCode == 200) {
+       Map<String, dynamic> data = json.decode(response.body);
+       print(data['propertyName']);
+     } else {
+       print('Failed to load data');
+     }
+   }
+   ```
+
+2. **Pengambilan Data dengan Model:**
+   Jika proyek kita melibatkan banyak data yang kompleks atau kita ingin mengorganisasi data dengan lebih baik, membuat model dapat menjadi pilihan yang baik. Dengan membuat model, kita dapat mengonversi respons JSON menjadi objek Dart yang dapat digunakan dengan lebih mudah dalam aplikasi.
+
+   Contoh pengambilan data dengan model menggunakan model sederhana:
+
+   ```dart
+   import 'dart:convert';
+   import 'package:http/http.dart' as http;
+
+   class MyData {
+     final String propertyName;
+
+     MyData({required this.propertyName});
+
+     factory MyData.fromJson(Map<String, dynamic> json) {
+       return MyData(
+         propertyName: json['propertyName'],
+       );
+     }
+   }
+
+   Future<MyData> fetchData() async {
+     final response = await http.get('https://example.com/api/data');
+     if (response.statusCode == 200) {
+       Map<String, dynamic> data = json.decode(response.body);
+       return MyData.fromJson(data);
+     } else {
+       throw Exception('Failed to load data');
+     }
+   }
+   ```
+
+   Dengan model, kita mendapatkan manfaat validasi tipe dan lebih mudah memahami struktur data.
+
+Pilihan antara kedua pendekatan ini tergantung pada kompleksitas proyek dan preferensi. Jika proyek  kecil dan sederhana, tanpa model mungkin cukup. Namun, untuk proyek yang lebih besar dan kompleks, membuat model dapat membantu mempertahankan struktur yang lebih terorganisir dan mudah dimengerti.
+
+2. Jelaskan fungsi dari CookieRequest dan jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.
+Jawab:
+`CookieRequest` pada konteks Flutter biasanya adalah sebuah kelas yang digunakan untuk menangani permintaan (request) HTTP ke server, terutama terkait autentikasi dan manajemen cookie. Dalam konteks aplikasi Flutter yang berkomunikasi dengan backend Django (sepertinya berdasarkan perintah dan kode yang diberikan), `CookieRequest` ini kemungkinan besar berkaitan dengan manajemen otentikasi pengguna dan pengiriman cookie untuk mempertahankan sesi pengguna.
+
+Fungsi dari `CookieRequest` biasanya mencakup:
+
+1. **Autentikasi Pengguna:** Mengirim permintaan otentikasi ke server dan menerima token otentikasi sebagai respons. Token ini kemudian dapat disimpan dan digunakan untuk otentikasi setiap permintaan berikutnya.
+
+2. **Manajemen Cookie:** Saat menggunakan otentikasi berbasis sesi atau token, server akan memberikan cookie sebagai tanda bahwa pengguna telah terotentikasi. `CookieRequest` dapat membantu dalam mengelola cookie ini dan mengirimkannya kembali ke server saat permintaan berikutnya untuk menjaga sesi otentikasi.
+
+Mengapa perlu membagikan instance `CookieRequest` ke semua komponen di aplikasi Flutter?
+
+1. **Global State Management:** Dengan membagikan instance `CookieRequest` melalui `Provider` (sepertinya berdasarkan kode yang diberikan), Anda dapat membuatnya menjadi bagian dari global state di aplikasi Flutter Anda. Ini memungkinkan berbagai bagian dari aplikasi, seperti berbagai layar atau widget, untuk mengakses dan menggunakan objek `CookieRequest` yang sama. Dengan demikian, informasi otentikasi dan manajemen cookie dapat diakses dan diperbarui secara konsisten di seluruh aplikasi.
+
+2. **Kemudahan Penggunaan:** Dengan membuat `CookieRequest` dapat diakses dari mana saja dalam aplikasi, Anda menghindari perlu melewatkan objek ini melalui berbagai tingkatan widget. Ini membuat kodenya lebih bersih dan lebih mudah diatur.
+
+3. **Konsistensi Otentikasi:** Ketika Anda berbagi instance `CookieRequest`, Anda memastikan bahwa setiap komponen aplikasi menggunakan objek yang sama untuk otentikasi. Ini mencegah situasi di mana beberapa bagian dari aplikasi mengelola otentikasi secara terpisah dan mungkin dapat menyebabkan masalah keamanan atau inkonsistensi.
+
+3. Jelaskan mekanisme pengambilan data dari JSON hingga dapat ditampilkan pada Flutter.
+Jawab:
+Proses pengambilan data dari JSON hingga ditampilkan pada Flutter melibatkan beberapa langkah utama:
+
+1. **Pengambilan Data dari Server:**
+   - Aplikasi Flutter membuat permintaan HTTP ke server, biasanya menggunakan paket seperti `http` untuk Dart/Flutter.
+   - Server merespons permintaan dengan data dalam format JSON.
+
+2. **Pemrosesan Data JSON:**
+   - Data JSON yang diterima dari server perlu diproses agar dapat digunakan dalam aplikasi Flutter. Ini melibatkan deserialisasi JSON menjadi objek Dart menggunakan metode seperti `json.decode()`.
+
+3. **Pemodelan Data:**
+   - Biasanya, data yang diterima dari server kemudian dimodelkan dalam bentuk objek Dart. Objek ini mewakili struktur data yang diterima.
+   - Pemodelan ini memungkinkan akses lebih mudah dan aman ke data, karena data sekarang dapat diakses melalui properti objek.
+
+4. **State Management:**
+   - Data yang diterima dan dimodelkan perlu dikelola dengan benar. Ini melibatkan penggunaan manajemen status Flutter, seperti `Provider` atau `Bloc`, untuk menyimpan dan memperbarui data secara reaktif.
+
+5. **Pengaturan Tampilan (Widget):**
+   - Widget Flutter, seperti `ListView`, `GridView`, atau `DataTable`, kemudian digunakan untuk menampilkan data.
+   - Data dimasukkan ke dalam widget melalui properti atau melalui manajemen status.
+
+6. **Pemisahan Tampilan dan Logika:**
+   - Umumnya, tata letak dan logika terpisah untuk meningkatkan pemeliharaan dan kejelasan kode.
+   - Widget yang bertanggung jawab untuk tata letak memperoleh data dari objek model yang sesuai dan menampilkan informasi tersebut.
+Sumber: https://www.gamelab.id/news/1792-tutorial-menampilkan-data-api-menggunakan-flutter
+
+
+4. Jelaskan mekanisme autentikasi dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.
+Jawab: 
+Mekanisme autentikasi dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter melibatkan beberapa langkah. Berikut adalah langkah-langkah umumnya:
+
+### Pada Aplikasi Flutter (Client Side):
+
+1. **Formulir Login/Register:**
+   - Aplikasi Flutter menyediakan formulir login dan/atau registrasi yang memungkinkan pengguna memasukkan informasi akun, seperti username dan password.
+
+2. **Permintaan Autentikasi:**
+   - Saat pengguna mengirim formulir, aplikasi Flutter membuat permintaan autentikasi ke backend Django.
+   - Permintaan ini mungkin berupa permintaan HTTP POST yang berisi informasi login pengguna.
+
+3. **Penanganan Respon:**
+   - Aplikasi Flutter menanggapi respon dari backend Django.
+   - Jika autentikasi berhasil, backend Django mengembalikan token akses atau sesi, atau informasi pengguna lainnya yang diperlukan.
+   - Aplikasi Flutter menyimpan informasi ini secara lokal, misalnya menggunakan `shared_preferences` atau `Provider` untuk manajemen status.
+
+### Pada Backend Django (Server Side):
+
+4. **Verifikasi Kredensial:**
+   - Backend Django menerima permintaan autentikasi.
+   - Kredensial pengguna diverifikasi, biasanya dengan memeriksa username dan password yang sesuai dengan data di database.
+
+5. **Generasi Token Akses (Opsional):**
+   - Jika backend Django menggunakan autentikasi berbasis token, backend dapat menghasilkan token akses dan mengirimkannya sebagai bagian dari respon ke Flutter.
+   - Token akses ini akan digunakan oleh Flutter untuk otentikasi di permintaan selanjutnya.
+
+6. **Respon ke Aplikasi Flutter:**
+   - Backend Django memberikan respon ke aplikasi Flutter, yang mengandung informasi autentikasi yang diperlukan atau token akses jika diperlukan.
+   - Jika autentikasi gagal, backend memberikan pesan kesalahan yang sesuai.
+
+### Kembali ke Aplikasi Flutter (Client Side):
+
+7. **Penanganan Respon:**
+   - Aplikasi Flutter menanggapi respon dari backend Django.
+   - Jika autentikasi berhasil, aplikasi Flutter dapat mengarahkan pengguna ke layar menu atau halaman utama.
+   - Jika autentikasi gagal, aplikasi Flutter dapat menampilkan pesan kesalahan atau meminta pengguna untuk mencoba lagi.
+
+8. **Navigasi Menu atau Halaman Utama:**
+   - Jika autentikasi berhasil, aplikasi Flutter menavigasi pengguna ke layar menu atau halaman utama yang sesuai.
+
+Sumber:https://firebase.google.com/docs/auth/flutter/start?hl=id
+
+5. Sebutkan seluruh widget yang kamu pakai pada tugas ini dan jelaskan fungsinya masing-masing.
+Jawab: 
+
+
+6. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial).
+Jawab:
+
+------------------------------------------------------------------------------------
 *TUGAS 8*
 
 1. Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement(), disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!

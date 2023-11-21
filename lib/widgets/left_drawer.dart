@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sayurbox_inventory/screens/menu.dart';
 import 'package:sayurbox_inventory/screens/shoplist_form.dart';
-import 'package:sayurbox_inventory/screens/product_list_page.dart';
-import 'package:sayurbox_inventory/widgets/product_model.dart';
+import 'package:sayurbox_inventory/screens/list_product.dart';
 
 class LeftDrawer extends StatelessWidget {
-  final List<Product> products; // Tambahkan properti products
-
-  const LeftDrawer({Key? key, required this.products}) : super(key: key);
+  const LeftDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +45,7 @@ class LeftDrawer extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MyHomePage(products: products),
+                  builder: (context) => MyHomePage(),
                 ),
               );
             },
@@ -60,20 +57,19 @@ class LeftDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ShopFormPage(products: products),
+                  builder: (context) => ShopFormPage(),
                 ),
               );
             },
           ),
           ListTile(
-            leading: const Icon(Icons.view_list),
-            title: const Text('Lihat Produk'),
+            leading: const Icon(Icons.shopping_basket),
+            title: const Text('Daftar Produk'),
             onTap: () {
+              // Route menu ke halaman produk
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => ProductListPage(products: products),
-                ),
+                MaterialPageRoute(builder: (context) => const ProductPage()),
               );
             },
           ),

@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:sayurbox_inventory/widgets/left_drawer.dart';
 import 'package:sayurbox_inventory/widgets/shop_card.dart';
 import 'package:sayurbox_inventory/screens/shoplist_form.dart'; // Import ShopFormPage
-import 'package:sayurbox_inventory/widgets/product_model.dart';
-import 'package:sayurbox_inventory/screens/product_list_page.dart';
+import 'package:sayurbox_inventory/screens/list_product.dart';
 
 class MyHomePage extends StatelessWidget {
-  final List<Product> products;
-
-  MyHomePage({Key? key, required this.products}) : super(key: key);
+  MyHomePage({Key? key}) : super(key: key);
 
   final List<ShopItem> items = [
     ShopItem("Lihat Item", Icons.checklist, Color.fromARGB(255, 69, 129, 86)),
@@ -27,9 +24,7 @@ class MyHomePage extends StatelessWidget {
         backgroundColor: Colors.teal[300],
         foregroundColor: Colors.white,
       ),
-      drawer: LeftDrawer(
-        products: products,
-      ),
+      drawer: LeftDrawer(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -54,7 +49,7 @@ class MyHomePage extends StatelessWidget {
                 crossAxisCount: 3,
                 shrinkWrap: true,
                 children: items.map((ShopItem item) {
-                  return ShopCard(item, products: products);
+                  return ShopCard(item);
                 }).toList(),
               ),
             ],
@@ -67,9 +62,8 @@ class MyHomePage extends StatelessWidget {
 
 class ShopCard extends StatelessWidget {
   final ShopItem item;
-  final List<Product> products;
 
-  ShopCard(this.item, {Key? key, required this.products}) : super(key: key);
+  ShopCard(this.item, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -86,18 +80,11 @@ class ShopCard extends StatelessWidget {
           if (item.name == "Tambah Item") {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => ShopFormPage(products: products)),
+              MaterialPageRoute(builder: (context) => ShopFormPage()),
             );
-          }
-
-          if (item.name == "Lihat Item") {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ProductListPage(products: products),
-              ),
-            );
+          } else if (item.name == "Lihat Produk") {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const ProductPage()));
           }
         },
         child: Container(
