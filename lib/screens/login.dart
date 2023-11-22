@@ -69,12 +69,11 @@ class _LoginPageState extends State<LoginPage> {
                 // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                 // Untuk menyambungkan Android emulator dengan Django pada localhost,
                 // gunakan URL http://10.0.2.2/
-                final response = await request.login(
-                    "https://marchelina-anjani-tugas.pbp.cs.ui.ac.id/auth/login/",
-                    {
-                      'username': username,
-                      'password': password,
-                    });
+                final response =
+                    await request.login("http://localhost:8000/auth/login/", {
+                  'username': username,
+                  'password': password,
+                });
 
                 if (request.loggedIn) {
                   String message = response['message'];

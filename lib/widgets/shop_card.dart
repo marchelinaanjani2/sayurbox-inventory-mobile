@@ -34,26 +34,8 @@ class ShopCard extends StatelessWidget {
                 builder: (context) => const ShopFormPage(),
               ),
             );
-          } else if (item.name == "Logout") {
-            final response = await request.logout(
-                // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
-                "http://marchelina-anjani-tugas.pbp.cs.ui.ac.id/auth/logout/");
-            String message = response["message"];
-            if (response['status']) {
-              String uname = response["username"];
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text("$message Sampai jumpa, $uname."),
-              ));
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const LoginPage()),
-              );
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text("$message"),
-              ));
-            }
           }
+          // Remove the logout part, so there is no action for "Logout" item.
         },
         child: Container(
           padding: const EdgeInsets.all(8.0),

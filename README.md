@@ -154,10 +154,81 @@ Sumber:https://firebase.google.com/docs/auth/flutter/start?hl=id
 
 5. Sebutkan seluruh widget yang kamu pakai pada tugas ini dan jelaskan fungsinya masing-masing.
 Jawab: 
+1. **Scaffold**: Digunakan untuk menentukan struktur dasar dari tampilan halaman, termasuk AppBar, Drawer, dan Body.
 
+2. **AppBar**: Menampilkan judul aplikasi dan menyediakan tempat untuk ikon atau aksi lainnya di bagian atas halaman.
+
+3. **Drawer**: Widget untuk menampilkan menu navigasi samping (drawer) yang dapat digeser ke samping.
+
+4. **ListView**: Menyusun widget-widget dalam daftar bergulir.
+
+5. **DrawerHeader**: Bagian header dalam Drawer yang biasanya digunakan untuk menampilkan judul atau informasi penting lainnya.
+
+6. **Text**: Menampilkan teks di antarmuka pengguna.
+
+7. **Icon**: Menampilkan ikon berdasarkan IconData.
+
+8. **ListTile**: Widget untuk menampilkan item dalam daftar (ListView). Biasanya digunakan di dalam Drawer untuk membuat item navigasi.
+
+9. **Material**: Mengimplementasikan komponen visual Material Design dan menyediakan efek responsif terhadap interaksi pengguna.
+
+10. **InkWell**: Mengimplementasikan efek ink splash (efek saat elemen disentuh) pada child widget.
+
+11. **Column**: Menyusun widget-widget anak dalam kolom vertikal.
+
+12. **Padding**: Menambahkan jarak (padding) pada widget anaknya.
+
+13. **PageRouteBuilder**: Digunakan untuk menangani animasi dan transisi antar halaman.
+
+14. **Navigator**: Menangani navigasi antar halaman dalam aplikasi.
+
+15. **Provider**: Untuk manajemen state di seluruh aplikasi.
+
+16. **FutureBuilder**: Mengelola proses asynchronous dan membangun antarmuka pengguna berdasarkan hasil dari Future.
+
+17. **SizedBox**: Menambahkan kotak dengan dimensi tertentu untuk memberikan ruang atau jarak di antara elemen-elemen antarmuka pengguna.
+
+18. **CircularProgressIndicator**: Menampilkan indikator lingkaran berputar untuk menunjukkan bahwa aplikasi sedang memproses sesuatu.
+
+19. **GestureDetector**: Mendeteksi gesture seperti ketukan (tap) pada widget.
+
+20. **IconButton**: Tombol yang hanya berisi ikon.
+
+Semua widget tersebut digunakan untuk membangun antarmuka pengguna aplikasi Flutter, dengan setiap widget memiliki fungsi dan karakteristik khususnya. Dengan menggunakan berbagai widget ini, dapat membuat tampilan yang interaktif dan responsif sesuai dengan kebutuhan aplikasi.
 
 6. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial).
 Jawab:
+1. **Deployment Proyek Django:**
+   - Pastikan proyek Django sudah di-deploy dengan baik.
+   - Pastikan endpoint JSON yang menyediakan data produk dapat diakses dari proyek Flutter.
+
+2. **Halaman Login pada Proyek Flutter:**
+   - Implementasikan halaman login pada proyek Flutter, baik dengan menggunakan widget bawaan Flutter atau paket eksternal seperti `flutter_bloc` atau `provider` untuk manajemen state.
+
+3. **Integrasi Sistem Autentikasi Django dengan Proyek Flutter:**
+   - Gunakan paket-paket seperti `http` atau `dio` untuk melakukan HTTP requests dari Flutter ke endpoint autentikasi Django.
+   - Atur state aplikasi Flutter untuk menangani informasi login/logout.
+
+4. **Model Kustom Django:**
+   - Pastikan model produk di Django telah didefinisikan dengan benar dengan atribut seperti `name`, `amount`, dan `description`.
+
+5. **Halaman Daftar Item:**
+   - Buat halaman Flutter untuk menampilkan daftar item.
+   - Gunakan `http` atau `dio` untuk mengambil data dari endpoint JSON di proyek Django.
+   - Tampilkan data yang diterima sesuai dengan kebutuhan  di halaman Flutter.
+
+6. **Halaman Detail untuk Setiap Item:**
+   - Implementasikan halaman detail Flutter yang dapat diakses dengan menekan salah satu item di halaman daftar.
+   - Gunakan navigator untuk melakukan perpindahan antar halaman.
+
+7. **Menampilkan Seluruh Atribut pada Halaman Detail:**
+   - Pastikan halaman detail menampilkan seluruh atribut dari model item, seperti `name`, `amount`, dan `description`.
+
+8. **Menambahkan Tombol Kembali:**
+   - Tambahkan tombol atau ikon yang memungkinkan pengguna kembali ke halaman daftar item.
+   - Gunakan navigator untuk kembali ke halaman sebelumnya.
+
+
 
 ------------------------------------------------------------------------------------
 *TUGAS 8*

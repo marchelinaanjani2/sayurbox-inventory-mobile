@@ -35,6 +35,14 @@ class _ShopFormPageState extends State<ShopFormPage> {
         ),
         backgroundColor: Colors.teal[300],
         foregroundColor: Colors.white,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.home),
+            onPressed: () {
+              Navigator.of(context).pop(); // Kembali ke halaman utama
+            },
+          ),
+        ],
       ),
       // TODO: Tambahkan drawer yang sudah dibuat di sini
       drawer: LeftDrawer(),
@@ -179,7 +187,7 @@ class _ShopFormPageState extends State<ShopFormPage> {
                         // Kirim ke Django dan tunggu respons
                         // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                         final response = await request.postJson(
-                          "http://marchelina-anjani-tugas.pbp.cs.ui.ac.id/create-flutter/",
+                          "http://localhost:8000/create-flutter/",
                           jsonEncode(<String, dynamic>{
                             'name': _name,
                             'price': _price,
